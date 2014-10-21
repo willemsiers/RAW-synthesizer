@@ -17,4 +17,4 @@ For this project we use the following hardware:
 
 Tech
 -----------
-Developped by Roel, Arnold and Willem
+Developed by Roel, Arnold and Willem
