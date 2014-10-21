@@ -15,6 +15,6 @@ For this project we use the following hardware:
 [Raspberry Pi]:http://uk.rs-online.com/web/p/processor-microcontroller-development-kits/7568308/
 [DE1-Soc]:http://www.altera.com/education/univ/materials/boards/de1-soc/unv-de1-soc-board.html
 
-Tech
+Developers
 -----------
 Developed by Roel, Arnold and Willem
