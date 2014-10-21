@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<link href="piano.css" rel="stylesheet" type="text/css">
+		<link href="channel.css" rel="stylesheet" type="text/css">
+		<!-- project.js -->
+		<title>Raspi Synthesizer</title>
+	</head>
+	<body>
+		<div id="controll_panel">
+			<div id="controll_toolbar">
+				<img src="img/ico/sliders.png" class="icon" />
+				<img src="img/ico/piano.png" class="icon" />
+				<img src="img/ico/play.png" class="icon" />
+				<img src="img/ico/record.png" class="icon" />
+				<img src="img/ico/download.png" class="icon" />
+				<img src="img/ico/upload.png" class="icon" />
+				<img src="img/ico/settings.png" class="icon" />
+			</div>
+			
+			
+			<div id="channel_header_box">
+				<div class="channel_bar_header channel_bar_header_active">
+					<img src="img/ico/piano.png" class="channel_bar_header_icon">
+				</div>
+				<div class="channel_bar_header">
+					<img src="img/ico/guitar.png" class="channel_bar_header_icon">
+				</div>
+				<div class="channel_bar_header">
+					<img src="img/ico/guitar.png" class="channel_bar_header_icon">
+				</div>
+				<div class="channel_bar_header">
+					<img src="img/ico/drum.png" class="channel_bar_header_icon">
+				</div>
+			</div>
+			<div id="channel_box">
+				<div class="channel_bar"></div>
+				<div class="channel_bar"> </div>
+				<div class="channel_bar"> </div>
+				<div class="channel_bar"> </div>
+			</div>
+			
+			<div id="piano_box">
+				<div class="piano_large_key piano_left_corner_key" style="left:0px;">
+					<img src="img/ico/goleft.png" class="piano_arrow" />
+				</div>
+				<div class="piano_large_key piano_right_corner_key" style="left:751px;">
+					<img src="img/ico/goright.png" class="piano_arrow" />
+				</div>
+				
+				<div class="piano_large_key piano_white_key" style="left:51px;" id="C1"></div>
+				<div class="piano_large_key piano_white_key" style="left:101px;" id="D1"></div>
+				<div class="piano_large_key piano_white_key" style="left:151px;" id="E1"></div>
+				<div class="piano_large_key piano_white_key" style="left:201px;" id="F1"></div>
+				<div class="piano_large_key piano_white_key" style="left:251px;" id="G1"></div>
+				<div class="piano_large_key piano_white_key" style="left:301px;" id="A1"></div>
+				<div class="piano_large_key piano_white_key" style="left:351px;" id="B1"></div>
+				<div class="piano_large_key piano_white_key" style="left:401px;" id="C2"></div>
+				<div class="piano_large_key piano_white_key" style="left:451px;" id="D2"></div>
+				<div class="piano_large_key piano_white_key" style="left:501px;" id="E2"></div>
+				<div class="piano_large_key piano_white_key" style="left:551px;" id="F2"></div>
+				<div class="piano_large_key piano_white_key" style="left:601px;" id="G2"></div>
+				<div class="piano_large_key piano_white_key" style="left:651px;" id="A2"></div>
+				<div class="piano_large_key piano_white_key" style="left:701px;" id="B2"></div>
+				
+				<div class="piano_black_key" style="margin-left:100px;" id="Cs1"></div>
+				<div class="piano_black_key" style="margin-left:150px;" id="Ds1"></div>
+				<div class="piano_black_key" style="margin-left:250px;" id="Fs1"></div>
+				<div class="piano_black_key" style="margin-left:300px;" id="Gs1"></div>
+				<div class="piano_black_key" style="margin-left:350px;" id="As1"></div>
+				<div class="piano_black_key" style="margin-left:450px;" id="Cs2"></div>
+				<div class="piano_black_key" style="margin-left:500px;" id="Ds2"></div>
+				<div class="piano_black_key" style="margin-left:600px;" id="Fs2"></div>
+				<div class="piano_black_key" style="margin-left:650px;" id="Gs2"></div>
+				<div class="piano_black_key" style="margin-left:700px;" id="As2"></div>
+			</div>
+		</div>
+	</body>
+</html>

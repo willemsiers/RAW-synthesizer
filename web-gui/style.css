@@ -1,0 +1,38 @@
+body {
+	background-image:url('img/darkfiber.png');
+	background-size:426px, 426px;
+}
+
+#controll_panel {
+	width:800px;
+	height:450px;
+    top: 50%;
+    left: 50%;
+    margin: -225px 0 0 -400px;
+	background-color:rgb(70,70,70);
+	border:2px solid black;
+	border-radius:5px;
+	position:absolute;
+}
+
+#controll_toolbar {
+	width:100%;
+	height:48px;
+	background: #454545; /* Fallback for older browsers */
+	background: linear-gradient(to bottom, #454545 0%,#373737 8%,#323232 50%,#2a2a2a 100%); 
+	margin:0px;
+	border-bottom:2px solid black;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	text-align:center;
+}
+
+.icon {
+	width:32px;
+	height:32px;
+	margin-top:8px;
+	margin-bottom:8px;
+	margin-left:32px;
+	margin-right:32px;
+}
+

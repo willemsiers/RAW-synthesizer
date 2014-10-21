@@ -1,0 +1,46 @@
+#channel_header_box {
+	width:80px;
+	height:258px;
+	position:absolute;
+	top:50px;
+	border-right:2px solid black;
+}
+
+#channel_box {
+	width:718px;
+	height:258px;
+	position:absolute;
+	top:50px;
+	left:82px;
+	overflow-x:scroll;
+}
+
+.channel_bar {
+	width: 1000px;
+	height:54px;
+	background-color:rgb(40,40,40);
+	border-bottom:2px solid black;
+	position:relative
+}
+
+.channel_bar_header {
+	width: 80px;
+	height: 54px;
+	left:0px;
+	text-align:center;
+	border-bottom:2px solid black;
+	background: #555555; /* Fallback for older browsers */
+	background: linear-gradient(to bottom, #555555 0%,#4a4a4a 8%,#454545 50%,#3f3f3f 100%);
+}
+
+.channel_bar_header_active {
+	background: #7f7f7f !important; /* Fallback for older browsers */
+	background: linear-gradient(to bottom, #7f7f7f 0%,#6e6e6e 8%,#656565 50%,#5b5b5b 100%) !important;
+}
+
+.channel_bar_header_icon {
+	width:32px;
+	height:32px;
+	margin-top:11px;
+	margin-bottom:11px;
+}
