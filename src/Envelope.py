@@ -22,9 +22,9 @@ class Envelope:
 
 	def untrigger(self):
 		self.endTime = time.time()
-		self.sustained = self.getVolume()
+		self.sustained = self.getAmplitude()
 
-	def getVolume(self):
+	def getAmplitude(self):
 		volume = -1
 		if((not (self.sustained is None))):
 			currentTime = time.time() - self.endTime
@@ -52,18 +52,18 @@ def checkInput():
 
 if __name__ == '__main__':
 
-	A = 0.1
-	D = 0.3
+	A = 2
+	D = 1
 	S = 0.25
 	R = 1
 
-	tone = ADSR(A,D,S,R)
+	tone = Envelope(A,D,S,R)
 	started = False
 	while(True):
 		if (checkInput()):
 			tone.untrigger() if started else tone.trigger()
 			started = not started
-		print tone.getVolume()
+		print tone.getAmplitude()
 		time.sleep(0.025)
 
 
@@ -77,6 +77,6 @@ if __name__ == '__main__':
 
 	vol = 0
 	while(vol != -1):
-		vol = tone.getVolume()
+		vol = tone.getAmplitude()
 		print(vol)
 
