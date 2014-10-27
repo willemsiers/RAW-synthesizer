@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Midi.cs">
+    <Files>
+      <File FileName="Assets\IInstrument.cs" Line="4" Column="31" />
+      <File FileName="Assets\Midi.cs" Line="16" Column="37" />
+      <File FileName="Assets\IInstrument.cs" Line="8" Column="1" />
+      <File FileName="Assets\C6Instrument.cs" Line="16" Column="22" />
+      <File FileName="Assets\BasicInstrument.cs" Line="10" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
