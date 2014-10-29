@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<raw>
+	<key_down id="247" time="00:31:322" note="c4#" vol="1" chan="0"/>
+</raw>
+
+<raw>
+	<key_up id="247" time="00:33:645" note="c4#" chan="0"/>
+</raw>
+
+<raw>
+	<new_chan waveform="triangle" attack="0.5" decay="0.5" sustain="0.3" release="0.5"/>
+</raw>
+
+<!-- open channel block -->
+<raw>
+	<new_chan_block size="3" waveform="triangle" attack="0.5" decay="0.5" sustain="0.3" release="0.5"/>
+</raw>
+
+<!-- response -->
+<raw>
+	<channel id="50"/>
+	<channel id="51"/>
+	<channel id="52"/>
+</raw>
+
+<raw>
+	<close_chan chan_id="1"/>
+</raw>
+
+<!-- id attribute is required, others are optional -->
+<raw>
+	<edit_chan id="12" waveform="square" attack="0.3" decay="0.1" sustain="0.6" release="0"/>
+</raw>
+
+<raw>
+	<changeset id="123">
+		<key_down id="248" time="00:31:322" freq="c4#" vol="1" chan="0"/>
+		<key_down id="244" time="00:31:322" freq="c4#" vol="1" chan="0"/>
+		<key_up id="244" time="00:33:645" freq="c4#" chan="0"/>
+		<del_note id="247"/>
+		<new_chan chan_id="1" instr="piano" mod=""/>
+		<close_chan chan_id="1"/>
+		<edit_chan chan_id="1" attack="0.8" decay="0.2" instr="piano" mod=""/>
+	</changeset>
+</raw>
