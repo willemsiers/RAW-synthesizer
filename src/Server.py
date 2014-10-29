@@ -2,7 +2,7 @@ import web
 import Channel
 import Envelope
 from xml.dom import minidom
-import SynthParser
+import SynthController
 
 urls = (
   '/*', 'index',
@@ -37,7 +37,7 @@ class api:
 		response.appendChild(parent)
 		for node in dom.childNodes[0].childNodes:
 			tagName = node.tagName
-			parser = getattr(SynthParser, tagName+"_event")
+			parser = getattr(SynthController, tagName+"_event")
 			parser(response, **dict(node.attributes.items()))
 
 			updateChanges.append(node)

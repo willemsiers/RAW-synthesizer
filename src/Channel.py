@@ -8,10 +8,11 @@ class Channel:
 	volume = 1
 	waveform = 5
 	waveshapes = ['square', 'sine', 'triangle', 'saw', 'noise']
+	notes = []
 
 	def __init__(self, channelNumber, waveform, envelope):
 	    print("Initialising Channel...#"+str(channelNumber))
-	    self.channelNumber = channelNumber
+	    self.id = channelNumber
 	    self.waveform = waveform
 	    self.envelope = envelope
 

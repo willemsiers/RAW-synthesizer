@@ -1,15 +1,17 @@
 from xml.dom import minidom
 from Channel import Channel
 from Envelope import Envelope
+from Synth import Synth
 
-def parse(node):
-	return node
+synth = Synth(5)
 
-channels = {}
-
-
-def key_down_event(id,time,note,vol,chan):
-	print "KEYDOWN: "
+def key_down_event(response, time, note,  chan, vol="1"):
+	print "KEYDOWN "
+	synth.lock.acquire(1) #do block
+	channel = synth.channels[int(chan)]
+	id = len(channel.notes)
+	channel.notes.append( {'startTime' : time, 'note' : note, 'volume': float(vol)})
+	synth.lock.release()
 
 def key_up_event():
 	print "KEYUP: "
@@ -21,11 +23,11 @@ def new_chan_block_event(response, size=5, waveform="square", attack=0, decay=0,
 
 	for i in range(0,int(size)):
 		env = Envelope(attack, decay, sustain, release)
-		env.trigger()
-		id = len(channels)
-		ids.append(id)
-		channel = Channel(int(id), waveform, env)
-		channels[int(id)] = channel
+		channel = synth.freeChannels.pop()
+		channel.envelope = env
+		channel.waveform = waveform
+		ids.append(channel.id)
+		synth.channels[channel.id] = channel
 
 	#generate response
 	for id in ids:
@@ -35,7 +37,7 @@ def new_chan_block_event(response, size=5, waveform="square", attack=0, decay=0,
 
 
 def edit_chan_event(response, id, waveform=None, attack=None, decay=None, sustain=None, release=None):
-	channel = channels[int(id)]
+	channel = synth.channels[int(id)]
 	for key, value in locals().iteritems():
 		if(not ((key == 'id') or value == None )):
 
@@ -46,8 +48,8 @@ def edit_chan_event(response, id, waveform=None, attack=None, decay=None, sustai
 
 def close_chan_event(response, id):
 	#crude implementation
-	channels[int(id)].volume = 0
-	del channels[id]	
+	synth.channels[int(id)].volume = 0
+	del synth.channels[id]	
 
 def note_del_event(response, ):
 	print "notedel event"
