@@ -34,4 +34,5 @@ int playNote(unsigned char channel, unsigned char effect, unsigned char freq, un
 	if (write(file, buffer, 3) == 1) {
 		return (3);
 	}
+	return 0;
 }

@@ -6,17 +6,17 @@ from Channel import Channel
 from Envelope import Envelope
 import threading
 import time
+from ctypes import cdll
+lib = cdll.LoadLibrary('./play.o')
 
 class Synth:
-
 
 	lock = threading.Lock()
 	channels = {}
 	freeChannels = []
-	pendingNotes = []
-	playingNotes = []
 
 	def __init__(self, maxChannel):
+
 		for i in range(0, maxChannel):
 			env = Envelope(0, 0, 1, 0) #default
 			channel = Channel(i, "square", env)
@@ -29,15 +29,13 @@ class Synth:
   	def main(self):
   		print "Starting main synth thread"
   		while(True):
-  			print "running..."
-  			self.lock.acquire(1) #blocking
  			for channel in self.channels.values():
- 				for note in list(channel.notes):
- 					if(note.time < )
- 					print "found note: "+str(note)
- 					channel.notes.remove(note)
- 			self.lock.release()
-  			time.sleep(0.5) ##lower later 
+ 				status = channel.getStatus()
+ 				if(status):
+ 					print status
+ 					#int playNote(unsigned char channel, unsigned char effect, unsigned char note, unsigned char type, unsigned char volume)
+ 					print "calling C: " +str(lib.playNote(channel.getId(), channel.effect, status['note'], status['waveform'], int(status['volume'])))
+			time.sleep(0.24) ##lower later 
 
 
 if __name__ == "__main__":

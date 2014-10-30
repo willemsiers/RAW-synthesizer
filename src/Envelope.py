@@ -3,15 +3,17 @@ import time
 import sys
 import select
 
+MIN_TIME = 0.00001 #quality code
+
 class Envelope:
 
 	MAX_VOLUME = 1
 
 	def __init__(self, attack, decay, sustain, release):
-		self.attack = attack
-		self.decay = decay
+		self.attack = max(attack, MIN_TIME)
+		self.decay = max(decay,MIN_TIME)
 		self.sustain = sustain
-		self.release = release
+		self.release = max(release,MIN_TIME)
 		self.sustained = 0;
 		self.endTime = 0;
 
@@ -52,9 +54,9 @@ def checkInput():
 
 if __name__ == '__main__':
 
-	A = 2
+	A = 1
 	D = 1
-	S = 0.25
+	S = 0.2
 	R = 1
 
 	tone = Envelope(A,D,S,R)
@@ -74,9 +76,4 @@ if __name__ == '__main__':
 
 	tone = ADSR(A,D,S,R)
 	tone.trigger()
-
-	vol = 0
-	while(vol != -1):
-		vol = tone.getAmplitude()
-		print(vol)
 

@@ -5,29 +5,27 @@ from Synth import Synth
 
 synth = Synth(5)
 
-def key_down_event(response, time, note,  chan, vol="1"):
-	print "KEYDOWN "
-	synth.lock.acquire(1) #do block
+def key_down_event(response, note,  chan, vol="1"):
 	channel = synth.channels[int(chan)]
-	id = len(channel.notes)
-	channel.notes.append( {'startTime' : time, 'note' : note, 'volume': float(vol)})
-	synth.lock.release()
+	channel.noteOn(note, float(vol))
 
-def key_up_event():
-	print "KEYUP: "
+def key_up_event(response, chan):
+	channel = synth.channels[int(chan)]
+	channel.noteOff()
 
-def new_chan_block_event(response, size=5, waveform="square", attack=0, decay=0, sustain=1, release=0):
+def new_chan_block_event(response, size=5, waveform="0", attack=2, decay=0, sustain=1, release=2):
 	print "New channel block requested:"+str(locals())
 
 	ids = []
 
 	for i in range(0,int(size)):
-		env = Envelope(attack, decay, sustain, release)
+		env = Envelope(float(attack), float(decay), float(sustain), float(release))
 		channel = synth.freeChannels.pop()
-		channel.envelope = env
-		channel.waveform = waveform
-		ids.append(channel.id)
-		synth.channels[channel.id] = channel
+		channel.setEnvelope(env)
+		channel.setWaveform(waveform)
+		id = channel.getId()
+		ids.append(id)
+		synth.channels[id] = channel
 
 	#generate response
 	for id in ids:
@@ -48,8 +46,8 @@ def edit_chan_event(response, id, waveform=None, attack=None, decay=None, sustai
 
 def close_chan_event(response, id):
 	#crude implementation
-	synth.channels[int(id)].volume = 0
-	del synth.channels[id]	
+	synth.channels[int(id)].setVolume(0)
+	# todo move channel to free
 
 def note_del_event(response, ):
 	print "notedel event"
