@@ -1,20 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
+POST CALLS:	Only new_chan and new_chan_block send a useful response (as specified below). 
+			Other calls may or may not respond with a body.
+
+
+Request new channel. All attributes are optional.
+Sustain must be in range [0-1]
 <raw>
-	<key_down freq="c4#" vol="1" chan="0"/>
+	<new_chan waveform="3" attack="0.5" decay="0.5" sustain="0.3" release="0.5"/>
 </raw>
 
+Response to new_chan:
 <raw>
-	<key_up freq="c4#" chan="0"/>
+	<channel id="50"/>
 </raw>
 
+
+Request new channel block. See new_chan, also size is optional
 <raw>
-	<new_chan chan_id="1" instr="piano" mod=""/>
+	<new_chan_block size="3" waveform="2" attack="0.5" decay="0.5" sustain="0.3" release="0.5"/>
 </raw>
 
+Response to new_chan_block:
 <raw>
-	<close_chan chan_id="1"/>
+	<channel id="50"/>
+	<channel id="52"/>
+	<channel id="12"/>
 </raw>
 
+Close requested channel
 <raw>
-	<edit_chan chan_id="1" mod=""/>
+	<close_chan id="1"/>
 </raw>
+
+
+Send a key_down event. note according to midi standard, vol is channel volume [0-127], chan should be requested first
+<raw>
+	<key_down note="43" vol="127" chan="0"/>
+</raw>
+
+See key_down 
+<raw>
+	<key_up chan="0"/>
+</raw>
+
+
+Edit channel. id attribute is required, others are optional, sustain in range [0-1]
+<raw>
+	<edit_chan id="12" waveform="2" attack="0.3" decay="0.1" sustain="0.6" release="0"/>
+</raw>
+
+
+
+GET CALLS:	!!!UNFINISHED BELOW HERE!!!!
+			must provide an url-encoded parameter 'id' which indicates the last event it received.
+			if id is left out it will be the same as -1, indicating 'get all data up to now'
+
+			the response is a list of events that had happened since the last id
+
+			contents:
+			key_down, key_up have a time attribute, and both are only added to the queue after key_up has been received
+			channel creation calls have the added id attribute
+			for the rest it mirrors the incomming post requests body
+			All events are have a parent 'changeset' with an id attribute, which is the last event the response contains
+
+<note start="3529111" end="35292800" note="35" vol="127" chan="1"/>
+
+
+<raw>
+	<changeset id="123">
+		<key_down id="248" time="00:31:322" note ="c4#" vol="1" chan="0"/>
+		<key_down id="244" time="00:31:322" note ="c4#" vol="1" chan="0"/>
+		<key_up id="244" time="00:33:645" note ="c4#" chan="0"/>
+		<new_chan chan_id="1" instr="piano" mod=""/>
+		<close_chan chan_id="1"/>
+		<edit_chan chan_id="1" attack="0.8" decay="0.2" instr="piano" mod=""/>
+	</changeset>
+</raw>
+
+<!-- 
+
+0 = square
+2 = sine
+3 = triangle
+4 = saw
+
+-->

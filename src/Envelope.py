@@ -7,8 +7,6 @@ MIN_TIME = 0.00001 #quality code
 
 class Envelope:
 
-	MAX_VOLUME = 1
-
 	def __init__(self, attack, decay, sustain, release):
 		self.attack = max(attack, MIN_TIME)
 		self.decay = max(decay,MIN_TIME)

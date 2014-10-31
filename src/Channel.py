@@ -1,23 +1,23 @@
 import time
 import Envelope
 
+MAX_VOLUME = pow(2,10)-1
+
 class Channel:
 
-	#current channel's volume [0-1]
-	_waveshapes = ['square', 'sine', 'triangle', 'saw', 'noise']
+	#current channel's volume [0-MAX_VOLUME]
 	_lastAmplitude = -1
-	_volume = 1.000
 	effect = 0 #unused still
-	
 
-	def __init__(self, channelNumber, waveform, envelope):
+	def __init__(self, synth, channelNumber, waveform, envelope):
 	    print("Initialising Channel...#"+str(channelNumber))
 	    self._id = channelNumber
 	    self.setWaveform(waveform)
 	    self.setEnvelope(envelope)
 	    self._changed = True #True to update the first time the channel is created
  	    self._note = 0
- 	    self._volume = 1
+ 	    self._velocity = 0
+ 	    self._synth = synth
 
  	def setWaveform(self, waveform):
  		self._waveform = waveform
@@ -27,24 +27,27 @@ class Channel:
  		self._envelope = envelope
  		#no need to update _changed
 
+ 	def getEnvelope(self):
+ 		return self._envelope
+
 	#call whenever the key is pressed (note as a string)
 	def noteOn(self, note, velocity):
 		self._note = note
 		self._envelope.trigger()
-		self._volume = velocity
+		self._velocity = velocity
 		# self._changed = True (Not needed)
 
 	#call whenever the key is released
 	def noteOff(self):
 		self._envelope.untrigger()
 
-	def setVolume(self, volume):
-		self._volume = min(127, max(0, volume))
-		self._changed = True
+	def getVelocity(self):
+		return self._velocity
 
-	#envelope's amplitude multiplied with the channel's volume
+
+	# envelope multiplied with the available shared volume and then multiplied with the velocity
 	def getAmplitude(self):
-		return self._envelope.getAmplitude() * self._volume
+		return self._envelope.getAmplitude() * ( MAX_VOLUME / len(self._synth.channels)) * (self.getVelocity()/127)
 
 	def getNote(self):
 		return self._note	
@@ -58,9 +61,10 @@ class Channel:
 		else:
 			self._lastAmplitude = amplitude
 			self._changed = False
-			return {'volume' : amplitude,
-					'waveform' : self._waveform,
-					'note' : self._note}
+			return {'note' : self._note,
+					'volume' : amplitude,
+					'waveform' : self._waveform
+					}
 
 	def getId(self):
 		return self._id

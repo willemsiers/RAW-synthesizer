@@ -3,6 +3,7 @@ import Channel
 import Envelope
 from xml.dom import minidom
 import SynthController
+import time
 
 urls = (
   '/*', 'index',
@@ -12,14 +13,11 @@ urls = (
 
 class api:
 
-	changes = {}
-	lastReceivedUpdate = 0
-
 	def GET(self):
 		web.header('Content-Type', 'text/xml')
 		params = web.input(lastId="-1")
 		lastId = params.lastId
-		print lastId
+		#synthcontroller get log
 		return lastId
 
 	def POST(self):
@@ -28,26 +26,24 @@ class api:
 
 		dom = minidom.parseString(data)
 
-		updateId = self.lastReceivedUpdate
-		self.lastReceivedUpdate += 1
-		updateChanges = []
-
 		response = minidom.Document()
 		parent = response.createElement("raw")
 		response.appendChild(parent)
-		for node in dom.childNodes[0].childNodes:
-			tagName = node.tagName
+		for event in dom.childNodes[0].childNodes:
+			tagName = event.tagName
 			parser = getattr(SynthController, tagName+"_event")
-			parser(response, **dict(node.attributes.items()))
+			parser(event, response, **dict(event.attributes.items()))
 
-			updateChanges.append(node)
-
-		self.changes[updateId] = updateChanges
 		return response.toprettyxml()
 
 class index:
 	def GET(self):
 		return render.index()
+
+epoch = time.time()
+
+def getTime(_time):
+	return int(( _time - epoch ) * pow(10,5))
 
 if __name__ == "__main__":
 	app = web.application(urls, globals())
