@@ -5,7 +5,7 @@ from Envelope import Envelope
 from Synth import Synth
 import time
 
-synth = Synth(5)
+synth = Synth(63)
 
 _log = []
 
@@ -19,7 +19,7 @@ def readLogAfter(lastReceivedId):
 
 def key_down_event(event, response, note,  chan, vol=1):
 	channel = synth.channels[int(chan)]
-	channel.noteOn(note, float(vol))
+	channel.noteOn(int(note), float(vol))
 
 def key_up_event(event, response, chan):
 	channel = synth.channels[int(chan)]
@@ -45,7 +45,7 @@ def new_chan_block_event(event, response, size=5, waveform=0, attack=2, decay=0,
 		env = Envelope(float(attack), float(decay), float(sustain), float(release))
 		channel = synth.freeChannels.pop()
 		channel.setEnvelope(env)
-		channel.setWaveform(waveform)
+		channel.setWaveform(int(waveform))
 		id = channel.getId()
 		ids.append(id)
 		synth.channels[id] = channel

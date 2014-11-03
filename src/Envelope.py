@@ -3,7 +3,7 @@ import time
 import sys
 import select
 
-MIN_TIME = 0.00001 #quality code
+MIN_TIME = 0.0001 #quality code
 
 class Envelope:
 

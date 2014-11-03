@@ -1,0 +1,2 @@
+gcc -shared -fPIC -g play.c -o play.o
+

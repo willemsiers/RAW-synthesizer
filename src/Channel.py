@@ -47,7 +47,8 @@ class Channel:
 
 	# envelope multiplied with the available shared volume and then multiplied with the velocity
 	def getAmplitude(self):
-		return self._envelope.getAmplitude() * ( MAX_VOLUME / len(self._synth.channels)) * (self.getVelocity()/127)
+		print "active channels: "+str(self._synth.channels)
+		return self._envelope.getAmplitude() * ( MAX_VOLUME / len(self._synth.channels))
 
 	def getNote(self):
 		return self._note	
@@ -55,11 +56,11 @@ class Channel:
 	def getStatus(self):
 		amplitude = self.getAmplitude()
 		self._changed = (self._changed or (not (amplitude == self._lastAmplitude)))
+		self._lastAmplitude = amplitude
 
 		if(not (self._changed)):
 			return False
 		else:
-			self._lastAmplitude = amplitude
 			self._changed = False
 			return {'note' : self._note,
 					'volume' : amplitude,

@@ -6,10 +6,9 @@ from Channel import Channel
 from Envelope import Envelope
 import threading
 import time
-from ctypes import cdll
-lib = cdll.LoadLibrary('./play.o')
+import play
 
-TIME_STEP = 0.009
+TIME_STEP = 0.05
 
 class Synth:
 
@@ -21,7 +20,7 @@ class Synth:
 
 		for i in range(0, maxChannel):
 			env = Envelope(0, 0, 1, 0) #default
-			channel = Channel(self, i, "0", env)
+			channel = Channel(self, i, 0, env)
 			self.freeChannels.append(channel)
 
 		t = threading.Thread(target=self.main, args = ())
@@ -35,12 +34,12 @@ class Synth:
 				status = channel.getStatus()
 				if(status):
 					#print status
-					#int playNote(unsigned char channel, unsigned char effect, unsigned char note, unsigned char type, unsigned short volume)
-
-					params = {'channel':channel.getId(), 'effect': int(channel.effect), 
+					
+					params = {  'channel':int(channel.getId()), 'effect': int(channel.effect), 
 								'note': int(status['note']), 
 								'type' : int(status['waveform']), 
-								'volume':int(status['volume'])}
-					print "calling lib->(" +str(lib.playNote(**params)) + ") from params:" + str(params)
+								'volume':int(status['volume']) }
+
+					print "\tSTATUS(" +str(play.playNote(**params)) +")"
 			time.sleep(TIME_STEP) ##lower later 
 
