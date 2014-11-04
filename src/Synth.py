@@ -15,6 +15,7 @@ class Synth:
 	lock = threading.Lock()
 	channels = {}
 	freeChannels = []
+	blocks = 0
 
 	def __init__(self, maxChannel):
 
@@ -40,6 +41,6 @@ class Synth:
 								'type' : int(status['waveform']), 
 								'volume':int(status['volume']) }
 
-					print "\tSTATUS(" +str(play.playNote(**params)) +")"
+					play.playNote(**params)
 			time.sleep(TIME_STEP) ##lower later 
 

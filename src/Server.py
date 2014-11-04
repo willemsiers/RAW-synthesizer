@@ -5,8 +5,10 @@ from xml.dom import minidom
 import SynthController
 import time
 
+render = web.template.render('static/')
+
 urls = (
-  '/*', 'index',
+  "/", "index",
   "/api/", "api",
   "/api", "api"
 )
@@ -15,15 +17,31 @@ class api:
 
 	def GET(self):
 		web.header('Content-Type', 'text/xml')
-		params = web.input(lastId="-1")
-		lastId = params.lastId
-		#synthcontroller get log
-		return lastId
+		params = web.input(lastid="-1")
+
+		response = minidom.Document()
+		parentEl = response.createElement("raw")
+		changeEl = response.createElement("changeset")
+
+		lastId = int(params.lastid)
+		logAfter = SynthController.readLogAfter(lastId)
+		log = logAfter[0]
+		newId = logAfter[1]
+
+		for e in log:
+			changeEl.appendChild(e)
+
+		changeEl.setAttribute("id",str(newId))
+		parentEl.appendChild(changeEl)
+		response.appendChild(parentEl)
+
+		return response.toprettyxml()
 
 	def POST(self):
 		web.header('Content-Type', 'text/xml')
 		data = web.data()
-
+		print data
+		data.replace("\n\r",'')
 		dom = minidom.parseString(data)
 
 		response = minidom.Document()
@@ -38,7 +56,7 @@ class api:
 
 class index:
 	def GET(self):
-		return render.index()
+		return web.redirect("static/index.htm") #jajaj
 
 epoch = time.time()
 

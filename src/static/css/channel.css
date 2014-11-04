@@ -1,0 +1,107 @@
+#channel_container {
+	width:800px;
+	height:358px;
+	position:absolute;
+	top:50px;
+	overflow-y:scroll;
+	overflow-x:hidden;
+}
+
+#channel_header_box {
+	width:80px;
+	height:100%;
+	position:absolute;
+}
+
+#channel_box {
+	width:100%;
+	height:100%;
+	position:absolute;
+	margin-left:82px;
+}
+
+.channel_bar {
+	width: 100%;
+	height: 54px;
+	background-color:rgb(40,40,40);
+	border-bottom:2px solid black;
+	position:relative
+}
+
+.channel_bar_header {
+	width: 80px;
+	height: 54px;
+	left:0px;
+	text-align:center;
+	border-bottom:2px solid black;
+	border-right:2px solid black;
+	background: #555555; /* Fallback for older browsers */
+	background: linear-gradient(to bottom, #555555 0%,#4a4a4a 8%,#454545 50%,#3f3f3f 100%);
+}
+
+.channel_bar_header_active {
+	background: #7f7f7f; /* Fallback for older browsers */
+	background: linear-gradient(to bottom, #7f7f7f 0%,#6e6e6e 8%,#656565 50%,#5b5b5b 100%) !important;
+}
+
+.channel_bar_header_icon {
+	width:32px;
+	height:32px;
+	margin-top:11px;
+	margin-bottom:11px;
+}
+
+.note_box {
+	width:48px;
+	height:36px;
+	line-height:32px;
+	text-align:center;
+	font-family:Ubuntu;
+	font-size:1.2em;
+	margin-left:10px;
+	top:9px;
+	float: left;
+	position:relative;
+	border-radius:5px;
+	color:white;
+	background: #7f7f7f; /* Fallback for older browsers */
+	background: linear-gradient(to bottom, #7f7f7f 0%,#6e6e6e 8%,#656565 50%,#5b5b5b 100%);
+}
+
+.note_box_green {
+	background: #019801; /* Fallback for older browsers */
+	background: linear-gradient(to bottom, #019801 0%,#008c00 8%,#008300 50%,#007000 100%);
+}
+
+.note_box_blue {
+	background: #0000ac; /* Fallback for older browsers */
+	background: linear-gradient(to bottom, #0000be 0%,#0000ac 8%,#00009c 50%,#000087 100%); 
+}
+
+.note_box_hidden {
+	background: none;
+}
+
+.note_box_double {
+	width: 106px !important;
+}
+
+.channel_bar_size_single {
+	height: 54px !important;
+}
+
+.channel_bar_size_double {
+	height: 110px !important;
+}
+
+.channel_bar_size_triple {
+	height: 166px !important;
+}
+
+.channel_bar_size_quadruple {
+	height: 222px !important;
+}
+
+.channel_bar_size_quintuple {
+	height: 278px !important;
+}

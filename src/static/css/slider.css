@@ -1,0 +1,148 @@
+#slider_box {
+	width:100%;
+	height:140px;
+	position:absolute;
+	bottom:0px;
+	border-top:2px solid black;
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	
+	background-color:rgb(60,60,60);
+}
+
+.slider_input {
+
+}
+
+.slider_div {
+	position: absolute;
+	background: transparent;
+	margin:15px;
+	color:white;
+	font-family:"Ubuntu";
+}
+
+#attack_div {
+	top:0px;
+	left:20px;
+}
+
+#sustain_div {
+	bottom:-10px;
+	left:20px;
+}
+
+#decay_div {
+	top:0px;
+	margin-left:50%;
+	left:-100px;
+}
+
+#release_div {
+	bottom:-10px;
+	margin-left:50%;
+	left:-100px;
+}
+
+#volume_div {
+	top:0px; 
+	right:20px;
+}
+
+#distortion_div {
+	bottom:-10px;
+	right:20px;
+}
+
+/* The next part is made with help of: http://brennaobrien.com/blog/2014/05/style-input-type-range-in-every-browser.html */
+
+input[type=range] {
+    margin-top:-15px;
+	/*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid transparent;
+    
+    /*required for proper track sizing in FF*/
+    width: 200px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 200px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 10px;
+    background: #141414;
+    margin-top: -4px;
+	border-radius: 1px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #A0A0A0;
+}
+
+input[type=range]::-moz-range-track {
+    width: 200px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 10px;
+    background: #141414;
+	border-radius: 1px;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    width: 200px;
+    height: 5px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+	
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #A0A0A0;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 10px;
+	border-radius: 1px;
+    background: #141414;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #A0A0A0;
+}

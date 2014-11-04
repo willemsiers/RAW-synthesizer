@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="css\style.css" rel="stylesheet" type="text/css">
+		<link href="css\piano.css" rel="stylesheet" type="text/css">
+		<link href="css\slider.css" rel="stylesheet" type="text/css">
+		<link href="css\channel.css" rel="stylesheet" type="text/css">
+		<link href='//fonts.googleapis.com/css?family=Ubuntu&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		
+		<!-- JQuerry -->
+		<script type="text/javascript" src='js/jquery-2.1.1.js'></script>
+		
+		<!-- project.js -->
+		<script src="js/piano.js"></script>
+		<script src="js/init_piano.js"></script>
+		<script src="js/channel.js"></script>
+		<script src="js/controls.js"></script>
+		<script src="js/update.js"></script>
+		
+		<title>RAW – Synthesizer</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+	</head>
+	<body>
+		<div id="controll_panel">
+			<div id="controll_toolbar">
+				<img src="img/ico/sliders.png" class="icon" OnClick="toggleSlider();"/>
+				<img src="img/ico/piano.png" class="icon" OnClick="togglePiano();"/>
+				<img src="img/ico/play.png" class="icon" />
+				<img src="img/ico/record.png" class="icon" />
+				<img src="img/ico/download.png" class="icon" />
+				<img src="img/ico/upload.png" class="icon" />
+				<img src="img/ico/settings.png" class="icon" />
+			</div>
+			
+			<div id="channel_container">
+				<div id="channel_header_box">
+				</div>
+				<div id="channel_box">
+				</div>
+			</div>
+			<div id="piano_box" style="visibility:visible">
+				<div class="piano_large_key piano_left_corner_key" style="left:0px;" OnMouseDown="modOctave(-2);">
+					<img src="img/ico/goleft.png" class="piano_arrow" />
+				</div>
+				<div class="piano_large_key piano_right_corner_key" style="left:751px;" OnMouseDown="modOctave(2);">
+					<img src="img/ico/goright.png" class="piano_arrow" />
+				</div>
+				
+				<div class="piano_large_key piano_white_key" style="left:51px;" id="C1" OnMouseDown="onPianoKeyDown('C1');" OnMouseUp="onPianoKeyUp('C1');"></div>
+				<div class="piano_large_key piano_white_key" style="left:101px;" id="D1" OnMouseDown="onPianoKeyDown('D1');" OnMouseUp="onPianoKeyUp('D1');"></div>
+				<div class="piano_large_key piano_white_key" style="left:151px;" id="E1" OnMouseDown="onPianoKeyDown('E1');" OnMouseUp="onPianoKeyUp('E1');"></div>
+				<div class="piano_large_key piano_white_key" style="left:201px;" id="F1" OnMouseDown="onPianoKeyDown('F1');" OnMouseUp="onPianoKeyUp('F1');"></div>
+				<div class="piano_large_key piano_white_key" style="left:251px;" id="G1" OnMouseDown="onPianoKeyDown('G1');" OnMouseUp="onPianoKeyUp('G1');"></div>
+				<div class="piano_large_key piano_white_key" style="left:301px;" id="A1" OnMouseDown="onPianoKeyDown('A1');" OnMouseUp="onPianoKeyUp('A1');"></div>
+				<div class="piano_large_key piano_white_key" style="left:351px;" id="B1" OnMouseDown="onPianoKeyDown('B1');" OnMouseUp="onPianoKeyUp('B1');"></div>
+				<div class="piano_large_key piano_white_key" style="left:401px;" id="C2" OnMouseDown="onPianoKeyDown('C2');" OnMouseUp="onPianoKeyUp('C2');"></div>
+				<div class="piano_large_key piano_white_key" style="left:451px;" id="D2" OnMouseDown="onPianoKeyDown('D2');" OnMouseUp="onPianoKeyUp('D2');"></div>
+				<div class="piano_large_key piano_white_key" style="left:501px;" id="E2" OnMouseDown="onPianoKeyDown('E2');" OnMouseUp="onPianoKeyUp('E2');"></div>
+				<div class="piano_large_key piano_white_key" style="left:551px;" id="F2" OnMouseDown="onPianoKeyDown('F2');" OnMouseUp="onPianoKeyUp('F2');"></div>
+				<div class="piano_large_key piano_white_key" style="left:601px;" id="G2" OnMouseDown="onPianoKeyDown('G2');" OnMouseUp="onPianoKeyUp('G2');"></div>
+				<div class="piano_large_key piano_white_key" style="left:651px;" id="A2" OnMouseDown="onPianoKeyDown('A2');" OnMouseUp="onPianoKeyUp('A2');"></div>
+				<div class="piano_large_key piano_white_key" style="left:701px;" id="B2" OnMouseDown="onPianoKeyDown('B2');" OnMouseUp="onPianoKeyUp('B2');"></div>
+				
+				<div class="piano_black_key" style="margin-left:100px;" id="C1#" OnMouseDown="onPianoKeyDown('C1#');" OnMouseUp="onPianoKeyUp('C1#');"></div>
+				<div class="piano_black_key" style="margin-left:150px;" id="D1#" OnMouseDown="onPianoKeyDown('D1#');" OnMouseUp="onPianoKeyUp('D1#');"></div>
+				<div class="piano_black_key" style="margin-left:250px;" id="F1#" OnMouseDown="onPianoKeyDown('F1#');" OnMouseUp="onPianoKeyUp('F1#');"></div>
+				<div class="piano_black_key" style="margin-left:300px;" id="G1#" OnMouseDown="onPianoKeyDown('G1#');" OnMouseUp="onPianoKeyUp('G1#');"></div>
+				<div class="piano_black_key" style="margin-left:350px;" id="A1#" OnMouseDown="onPianoKeyDown('A1#');" OnMouseUp="onPianoKeyUp('A1#');"></div>
+				<div class="piano_black_key" style="margin-left:450px;" id="C2#" OnMouseDown="onPianoKeyDown('C2#');" OnMouseUp="onPianoKeyUp('C2#');"></div>
+				<div class="piano_black_key" style="margin-left:500px;" id="D2#" OnMouseDown="onPianoKeyDown('D2#');" OnMouseUp="onPianoKeyUp('D2#');"></div>
+				<div class="piano_black_key" style="margin-left:600px;" id="F2#" OnMouseDown="onPianoKeyDown('F2#');" OnMouseUp="onPianoKeyUp('F2#');"></div>
+				<div class="piano_black_key" style="margin-left:650px;" id="G2#" OnMouseDown="onPianoKeyDown('G2#');" OnMouseUp="onPianoKeyUp('G2#');"></div>
+				<div class="piano_black_key" style="margin-left:700px;" id="A2#" OnMouseDown="onPianoKeyDown('A2#');" OnMouseUp="onPianoKeyUp('A2#');"></div>
+			</div>
+			<div id="slider_box" style="visibility:hidden">
+				<div class="slider_div" id="attack_div">
+					Attack<br />
+					<input type="range" min="0" max="100" class="slider_input" id="attack_slider"/>
+				</div>
+				<div class="slider_div" id="decay_div">
+					Decay<br />
+					<input type="range" min="0" max="100" class="slider_input" id="decay_slider"/>
+				</div>
+				<div class="slider_div" id="sustain_div">
+					Sustain<br />
+					<input type="range" min="0" max="100" class="slider_input" id="sustain_slider"/>
+				</div>
+				<div class="slider_div" id="release_div">
+					Release<br />
+					<input type="range" min="0" max="200" class="slider_input" id="release_slider"/>
+				</div>
+				<div class="slider_div" id="volume_div">
+					Master Volume<br />
+					<input type="range" min="0" max="100" class="slider_input" id="volume_slider"/>
+				</div>
+				<div class="slider_div" id="distortion_div">
+					Distortion<br />
+					<input type="range" min="0" max="100" class="slider_input" id="distortion_slider"/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

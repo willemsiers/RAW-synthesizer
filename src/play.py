@@ -12,4 +12,4 @@ def playNote (channel, effect, note, type, volume):
 	else:
 		data1 = "0x" + data1
 	#print data1
-	call(["./rwi2c", "writeto", hex(channel), data1])	
+	call(["./rwi2c.exe", "writeto", hex(channel), data1])	

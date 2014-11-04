@@ -51,32 +51,38 @@ Edit channel. id attribute is required, others are optional, sustain in range [0
 
 
 
-GET CALLS:	!!!UNFINISHED BELOW HERE!!!!
+GET CALLS:
 			must provide an url-encoded parameter 'id' which indicates the last event it received.
 			if id is left out it will be the same as -1, indicating 'get all data up to now'
 
 			the response is a list of events that had happened since the last id
 
 			contents:
-			key_down, key_up have a time attribute, and both are only added to the queue after key_up has been received
+			note events have a time attribute, and both are only added to the queue after key_up has been received
 			channel creation calls have the added id attribute
 			for the rest it mirrors the incomming post requests body
 			All events are have a parent 'changeset' with an id attribute, which is the last event the response contains
+			Also each event has an eventtime attribute
 
 <note start="3529111" end="35292800" note="35" vol="127" chan="1"/>
 
-
 <raw>
-	<changeset id="123">
-		<key_down id="248" time="00:31:322" note ="c4#" vol="1" chan="0"/>
-		<key_down id="244" time="00:31:322" note ="c4#" vol="1" chan="0"/>
-		<key_up id="244" time="00:33:645" note ="c4#" chan="0"/>
-		<new_chan chan_id="1" instr="piano" mod=""/>
-		<close_chan chan_id="1"/>
-		<edit_chan chan_id="1" attack="0.8" decay="0.2" instr="piano" mod=""/>
+	<changesetid="6">
+		<channel_blockeventtime="660188"id="0">
+			<channelid="62"waveform="3"/>
+			<channelid="61"waveform="3"/>
+			<channelid="60"waveform="3"/>
+			<channelid="59"waveform="3"/>
+			<channelid="58"waveform="3"/>
+		</channel_block>
+		<notechan="62"end="1690661"eventtime="1690772"note="38"start="1690003"vol="1.0"/>
+		<notechan="62"end="1694618"eventtime="1694865"note="38"start="1690003"vol="1.0"/>
+		<notechan="62"end="2246985"eventtime="2247107"note="64"start="2230559"vol="1.0"/>
+		<notechan="62"end="2251803"eventtime="2252000"note="64"start="2230559"vol="1.0"/>
+		<notechan="62"end="2583923"eventtime="2584037"note="67"start="2572323"vol="1.0"/>
+		<notechan="62"end="2584515"eventtime="2584630"note="67"start="2572323"vol="1.0"/>
 	</changeset>
 </raw>
-
 <!-- 
 
 0 = square
