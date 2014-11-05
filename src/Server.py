@@ -16,6 +16,12 @@ urls = (
 class api:
 
 	def GET(self):
+
+		web.header("Expires", "Tue, 03 Jul 2001 06:00:00 GMT");
+		web.header("Last-Modified", time.time());
+		web.header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0");
+		web.header("Pragma", "no-cache");
+
 		web.header('Content-Type', 'text/xml')
 		params = web.input(lastid="-1")
 
@@ -50,6 +56,7 @@ class api:
 		for event in dom.childNodes[0].childNodes:
 			tagName = event.tagName
 			parser = getattr(SynthController, tagName+"_event")
+			print str(event.attributes.items())
 			parser(event, response, **dict(event.attributes.items()))
 
 		return response.toprettyxml()

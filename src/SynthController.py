@@ -18,7 +18,7 @@ def appendLog(event):
 def readLogAfter(lastReceivedId):
 	return (_log[(lastReceivedId+1):], len(_log)-1)
 
-def key_down_event(event, response, note,  chan, vol=1):
+def key_down_event(event, response, note, chan, vol=1):
 	channel = synth.channels[int(chan)]
 	channel.noteOn(int(note), float(vol))
 
@@ -73,20 +73,25 @@ def edit_chan_event(event, response, id, waveform=None, attack=None, decay=None,
 		if(not ((key == 'id') or value == None )):
 			if(key == 'waveform'):
 				setattr(channel, key, value)
+			elif (key=='event' or key=='response' or key=='channel'):
+				1+1
 			else:
-				setattr(channel.envelope, key, value)
+				getattr(channel._envelope, "set_"+str(key))(float(value))
 
 	appendLog(event)
 
 def close_chan_event(event, response, id):
+	print "close channel called"
 	channel = synth.channels[int(id)]
 	channel.setVolume(0)
 	channel.closing = True
 	appendLog(event)
 
+def set_master_volume_event(event, response, value):
+	##WATCH OUT TO NOT OVERFLOW THE VOLUME FIELD
+	synth._overdrive = (float(value)/float(100))*8
+	appendLog(event)
 
-def set_master_volume(event, response, volume):
-	Channel.MAX_VOLUME = volume
-
-def set_distortion(event, response, level):
-	print "'set_distortion called'"
+def set_distortion_event(event, response, value):
+	synth.setDistortion(int(value))
+	appendLog(event)

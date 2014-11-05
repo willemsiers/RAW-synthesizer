@@ -8,9 +8,13 @@ import threading
 import time
 import play
 
-TIME_STEP = 0.05
+TIME_STEP = 0.005
 
 class Synth:
+
+	def setDistortion(self, distortion):
+		self._distortion = distortion
+		self._dist_changed = True
 
 	lock = threading.Lock()
 	channels = {}
@@ -18,7 +22,8 @@ class Synth:
 	blocks = 0
 
 	def __init__(self, maxChannel):
-
+		self._dist_changed = False
+		self._overdrive = 4
 		for i in range(0, maxChannel):
 			env = Envelope(0, 0, 1, 0) #default
 			channel = Channel(self, i, 0, env)
@@ -34,13 +39,13 @@ class Synth:
 			for channel in self.channels.values():
 				status = channel.getStatus()
 				if(status):
-					#print status
-					
 					params = {  'channel':int(channel.getId()), 'effect': int(channel.effect), 
 								'note': int(status['note']), 
 								'type' : int(status['waveform']), 
-								'volume':int(status['volume']) }
+								'volume':int(int(status['volume']) * self._overdrive) }
 
 					play.playNote(**params)
-			time.sleep(TIME_STEP) ##lower later 
-
+			if(self._dist_changed):
+				self._dist_changed = False
+				play.setDistortion(self._distortion)
+			time.sleep(TIME_STEP) 

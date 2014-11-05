@@ -4,6 +4,7 @@ import sys
 import select
 
 MIN_TIME = 0.0001 #quality code
+MAX_SUSTAINED_TIME = 6
 
 class Envelope:
 
@@ -20,15 +21,20 @@ class Envelope:
 		self.sustained = None
 		self.started = True;
 
-	def untrigger(self):
+	def untrigger(self, volume=-1):
 		self.endTime = time.time()
-		self.sustained = self.getAmplitude()
+		if(volume == -1):
+			self.sustained = self.getAmplitude()
+		else:
+			self.sustained = volume
 
 	def getAmplitude(self):
 		volume = -1
 		if((not (self.sustained is None))):
 			currentTime = time.time() - self.endTime
 			volume = self.sustained - self.sustained * (currentTime / self.release)
+
+
 		else:
 			currentTime = time.time()-self.startTime
 			if(currentTime <= self.attack):
@@ -37,9 +43,23 @@ class Envelope:
 				volume = 1-(((currentTime-self.attack)/self.decay)*(1-self.sustain))
 			else: 
 				volume = self.sustain
+				if(currentTime >= MAX_SUSTAINED_TIME):
+					self.untrigger(volume)
 
 		volume = min(1, max(volume, 0))
 		return volume
+
+	def set_attack(self, val):
+		self.attack = max(MIN_TIME, val)
+
+	def set_decay(self, val):
+		self.decay = max(MIN_TIME, val)
+
+	def set_sustain(self, val):
+		self.sustain = max(MIN_TIME, val)
+
+	def set_release(self, val):
+		self.release = max(MIN_TIME, val)
 
 #function used for debugging
 def checkInput():

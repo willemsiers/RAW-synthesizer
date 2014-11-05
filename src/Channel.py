@@ -1,7 +1,7 @@
 import time
 import Envelope
 
-MAX_VOLUME = pow(2,11)-1
+MAX_VOLUME = pow(2,10)-1
 
 class Channel:
 
